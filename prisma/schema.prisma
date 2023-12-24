@@ -22,15 +22,15 @@ model User {
 
 model Project {
   id      Int      @id @default(autoincrement())
-  name    String
-  userId  Int      // Foreign key referencing the User model
-  user    User     @relation(fields: [userId], references: [id])
+  name    String   @unique
+  userEmail  String      // Foreign key referencing the User model
+  user    User     @relation(fields: [userEmail], references: [email])
   flags   Flag[]
 }
 
 model Flag {
   id          Int      @id @default(autoincrement())
-  name        String
+  name        String   @unique
   description String
   active      Boolean
   projectId   Int      // Foreign key referencing the Project model

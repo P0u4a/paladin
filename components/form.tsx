@@ -5,6 +5,8 @@ import { signIn } from 'next-auth/react';
 import LoadingDots from '@/components/loading-dots';
 import toast from 'react-hot-toast';
 import Link from 'next/link';
+import { Input } from './ui/input';
+import { Button } from './ui/button';
 import { useRouter } from 'next/navigation';
 
 export default function Form({ type }: { type: 'login' | 'register' }) {
@@ -28,7 +30,7 @@ export default function Form({ type }: { type: 'login' | 'register' }) {
                             toast.error(error);
                         } else {
                             router.refresh();
-                            router.push('/protected');
+                            router.push('/projects');
                         }
                     });
                 } else {
@@ -57,46 +59,38 @@ export default function Form({ type }: { type: 'login' | 'register' }) {
                     });
                 }
             }}
-            className="flex flex-col space-y-4 bg-gray-50 px-4 py-8 sm:px-16"
+            className="flex flex-col space-y-4 px-4 py-8 sm:px-16"
         >
             <div>
-                <label
-                    htmlFor="email"
-                    className="block text-xs text-gray-600 uppercase"
-                >
+                <label htmlFor="email" className="block text-xs uppercase">
                     Email Address
                 </label>
-                <input
+                <Input
                     id="email"
                     name="email"
                     type="email"
                     placeholder="panic@thedis.co"
                     autoComplete="email"
                     required
-                    className="mt-1 block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-black focus:outline-none focus:ring-black sm:text-sm"
+                    className="mt-1 block w-full appearance-none rounded-md border px-3 py-2 shadow-sm focus:outline-none sm:text-sm"
                 />
             </div>
             <div>
-                <label
-                    htmlFor="password"
-                    className="block text-xs text-gray-600 uppercase"
-                >
+                <label htmlFor="password" className="block text-xs uppercase">
                     Password
                 </label>
-                <input
+                <Input
                     id="password"
                     name="password"
                     type="password"
                     required
-                    className="mt-1 block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-black focus:outline-none focus:ring-black sm:text-sm"
+                    className="mt-1 block w-full appearance-none rounded-md border px-3 py-2 shadow-sm focus:outline-none sm:text-sm"
                 />
             </div>
-            <button
+            <Button
                 disabled={loading}
                 className={`${
-                    loading
-                        ? 'cursor-not-allowed border-gray-200 bg-gray-100'
-                        : 'border-black bg-black text-white hover:bg-white hover:text-black'
+                    loading ? 'cursor-not-allowed' : ''
                 } flex h-10 w-full items-center justify-center rounded-md border text-sm transition-all focus:outline-none`}
             >
                 {loading ? (
@@ -104,22 +98,19 @@ export default function Form({ type }: { type: 'login' | 'register' }) {
                 ) : (
                     <p>{type === 'login' ? 'Sign In' : 'Sign Up'}</p>
                 )}
-            </button>
+            </Button>
             {type === 'login' ? (
-                <p className="text-center text-sm text-gray-600">
+                <p className="text-center text-sm">
                     Don&apos;t have an account?{' '}
-                    <Link
-                        href="/register"
-                        className="font-semibold text-gray-800"
-                    >
+                    <Link href="/register" className="font-semibold">
                         Sign up
                     </Link>{' '}
                     for free.
                 </p>
             ) : (
-                <p className="text-center text-sm text-gray-600">
+                <p className="text-center text-sm">
                     Already have an account?{' '}
-                    <Link href="/login" className="font-semibold text-gray-800">
+                    <Link href="/login" className="font-semibold">
                         Sign in
                     </Link>{' '}
                     instead.

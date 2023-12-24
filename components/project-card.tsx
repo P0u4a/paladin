@@ -6,7 +6,7 @@ type CardProps = {
     name: string;
 };
 
-export default function ProjectCard({ name, id }: CardProps) {
+export default function ProjectCard({ id, name }: CardProps) {
     return (
         <Link href={`/projects/${id}`} className="max-w-xs">
             <Card>
