@@ -1,8 +1,14 @@
 import prisma from '@/lib/prisma';
 import { NextResponse, NextRequest } from 'next/server';
 
-export async function POST(req: NextRequest) {
-    const { projectName, flagName } = await req.json();
+export async function GET(req: NextRequest) {
+    const { searchParams } = new URL(req.url);
+    const projectName = searchParams.get('pname');
+    const flagName = searchParams.get('fname');
+
+    if (!projectName || !flagName)
+        return new Response('Undefined params', { status: 400 });
+
     const apiKey = req.headers.get('X-Paladin-Key');
 
     if (!apiKey) return new Response('Unauthorized', { status: 401 });
@@ -37,5 +43,12 @@ export async function POST(req: NextRequest) {
 
     if (!flag) return new Response('Flag not found', { status: 404 });
 
-    return NextResponse.json({ flag }, { status: 200 });
+    return new Response(JSON.stringify(flag), {
+        status: 200,
+        headers: {
+            'Access-Control-Allow-Origin': '*',
+            'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
+            'Access-Control-Allow-Headers': 'Content-Type, Authorization',
+        },
+    });
 }
