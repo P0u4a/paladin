@@ -12,7 +12,7 @@ export async function OPTIONS(req: NextRequest) {
 }
 
 export async function POST(req: NextRequest) {
-    const apiKey = req.headers.get('Authorization');
+    const apiKey = req.headers.get('authorization');
 
     if (!apiKey) return new Response('Unauthorised', { status: 401 });
 
