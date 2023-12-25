@@ -38,7 +38,5 @@ export async function GET(req: Request) {
 
     if (!flag) return new Response('Flag not found', { status: 404 });
 
-    const active = flag.active;
-
-    return Response.json({ active }, { status: 200 });
+    return Response.json(flag, { status: 200 });
 }
