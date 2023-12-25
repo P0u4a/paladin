@@ -1,7 +1,6 @@
 import prisma from '@/lib/prisma';
-import { NextResponse, NextRequest } from 'next/server';
 
-export async function GET(req: NextRequest) {
+export async function GET(req: Request) {
     const { searchParams } = new URL(req.url);
     const projectName = searchParams.get('pname');
     const flagName = searchParams.get('fname');
@@ -43,7 +42,7 @@ export async function GET(req: NextRequest) {
 
     if (!flag) return new Response('Flag not found', { status: 404 });
 
-    return new Response(JSON.stringify(flag), {
+    return new Response(flag.active.toString(), {
         status: 200,
         headers: {
             'Access-Control-Allow-Origin': '*',
