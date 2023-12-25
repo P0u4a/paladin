@@ -7,24 +7,18 @@ const nextConfig = {
     async headers() {
         return [
             {
-                // Routes this applies to
+                // matching all API routes
                 source: '/api/external/get-flag',
-                // Headers
                 headers: [
-                    // Allow for specific domains to have access or * for all
-                    {
-                        key: 'Access-Control-Allow-Origin',
-                        value: '*',
-                    },
-                    // Allows for specific methods accepted
+                    { key: 'Access-Control-Allow-Credentials', value: 'true' },
+                    { key: 'Access-Control-Allow-Origin', value: '*' },
                     {
                         key: 'Access-Control-Allow-Methods',
-                        value: 'GET, POST, PUT, DELETE, OPTIONS',
+                        value: 'GET,OPTIONS,PATCH,DELETE,POST,PUT',
                     },
-                    // Allows for specific headers accepted
                     {
                         key: 'Access-Control-Allow-Headers',
-                        value: 'Content-Type, Authorization',
+                        value: 'X-Paladin-Key, X-CSRF-Token, X-Requested-With, Accept, Content-Type, ',
                     },
                 ],
             },

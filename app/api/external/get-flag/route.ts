@@ -1,18 +1,11 @@
 import prisma from '@/lib/prisma';
 import { NextResponse, NextRequest } from 'next/server';
 
-export const corsHeaders = {
-    'Access-Control-Allow-Origin': '*',
-    'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
-    'Access-Control-Allow-Headers': 'Content-Type, Authorization',
-};
-
-export async function OPTIONS(req: NextRequest) {
-    return NextResponse.json({}, { headers: corsHeaders });
-}
-
 export async function POST(req: NextRequest) {
-    const { apiKey, projectName, flagName } = await req.json();
+    const { projectName, flagName } = await req.json();
+    const apiKey = req.headers.get('X-Paladin-Key');
+
+    if (!apiKey) return new Response('Unauthorized', { status: 401 });
 
     const key = await prisma.apiKey.findUnique({
         where: {
@@ -44,5 +37,5 @@ export async function POST(req: NextRequest) {
 
     if (!flag) return new Response('Flag not found', { status: 404 });
 
-    return NextResponse.json({ flag }, { status: 200, headers: corsHeaders });
+    return NextResponse.json({ flag }, { status: 200 });
 }
