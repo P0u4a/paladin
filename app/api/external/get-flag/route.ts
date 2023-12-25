@@ -34,13 +34,11 @@ export async function GET(req: Request) {
                 },
             },
         },
-
-        select: {
-            active: true,
-        },
     });
 
     if (!flag) return new Response('Flag not found', { status: 404 });
 
-    return Response.json({ flag }, { status: 200 });
+    const active = flag.active;
+
+    return Response.json({ active }, { status: 200 });
 }
