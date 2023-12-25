@@ -1,9 +1,20 @@
 import prisma from '@/lib/prisma';
 import { headers } from 'next/headers';
+import { NextResponse, NextRequest } from 'next/server';
+
+export const corsHeaders = {
+    'Access-Control-Allow-Origin': '*',
+    'Access-Control-Allow-Methods': 'POST, OPTIONS',
+    'Access-Control-Allow-Headers': 'Content-Type, Authorization',
+};
+
+export async function OPTIONS(req: NextRequest) {
+    return NextResponse.json({}, { headers: corsHeaders });
+}
 
 export async function POST(req: Request) {
     const headerList = headers();
-    const apiKey = headerList.get('authorization');
+    const apiKey = headerList.get('Authorization');
 
     if (!apiKey) return new Response('Unauthorised', { status: 401 });
 
@@ -39,8 +50,5 @@ export async function POST(req: Request) {
 
     if (!flag) return new Response('Flag not found', { status: 404 });
 
-    return Response.json(
-        { flag },
-        { status: 200, headers: { 'Access-Control-Allow-Origin': '*' } }
-    );
+    return Response.json({ flag }, { status: 200, headers: corsHeaders });
 }
