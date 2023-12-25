@@ -18,6 +18,14 @@ model User {
   email     String   @unique
   password  String
   projects  Project[]
+  apiKeys   ApiKey[]
+}
+
+model ApiKey {
+  key      String    @id
+  name     String
+  userEmail   String       // Foreign key reference to User
+  user     User      @relation(fields: [userEmail], references: [email])
 }
 
 model Project {

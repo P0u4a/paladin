@@ -1,3 +1,5 @@
+'use client';
+
 import Link from 'next/link';
 import { Button } from './ui/button';
 import { buttonVariants } from './ui/button';
@@ -10,6 +12,7 @@ import {
 } from './ui/card';
 import { Badge } from './ui/badge';
 import { cn } from '@/lib/utils';
+import toast from 'react-hot-toast';
 type CardProps = {
     id: number;
     name: string;
@@ -18,6 +21,19 @@ type CardProps = {
 };
 
 export default function FlagCard({ id, name, description, active }: CardProps) {
+    const deleteFlag = async () => {
+        const res = await fetch('/api/delete-flag', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ id }),
+        });
+
+        if (res.status !== 200)
+            toast.error('Something went wrong. Please try again.');
+        else toast.success('Flag deleted successfully.');
+    };
     return (
         <Card className="max-w-xs">
             <CardHeader>
@@ -39,6 +55,7 @@ export default function FlagCard({ id, name, description, active }: CardProps) {
                     Edit
                 </Link>
                 <Button
+                    onClick={() => deleteFlag()}
                     className="text-red-500 border-red-500 hover:bg-red-500 hover:text-black"
                     variant="outline"
                 >

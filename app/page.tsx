@@ -29,14 +29,12 @@ export default function Home() {
                         Projects
                     </Link>
                     <p className="text-white">·</p>
-                    <a
-                        href="https://github.com/steven-tey/nextjs-typescript-starter"
-                        target="_blank"
-                        rel="noopener noreferrer"
+                    <Link
+                        href="/api-keys"
                         className="text-stone-400 underline hover:text-stone-200 transition-all"
                     >
-                        GitHub
-                    </a>
+                        API Keys
+                    </Link>
                     <p className="text-white">·</p>
                     <a
                         href="https://vercel.com/templates/next.js/prisma-postgres-auth-starter"

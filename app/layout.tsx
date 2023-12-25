@@ -5,6 +5,8 @@ import { Toaster } from 'react-hot-toast';
 import AuthStatus from '@/components/auth-status';
 import { Suspense } from 'react';
 import SignOut from '@/components/sign-out';
+import Link from 'next/link';
+import { SessionProvider } from 'next-auth/react';
 
 const inter = Inter({
     variable: '--font-inter',
@@ -32,8 +34,12 @@ export default async function RootLayout({
             <body className={inter.variable}>
                 <Toaster />
                 <Suspense fallback="Loading...">
-                    {/* @ts-expect-error Async Server Component */}
-                    <AuthStatus />
+                    <div className="flex flex-row gap-4 items-center bg-black absolute">
+                        <Link href="/">Home</Link>
+                        {/* @ts-expect-error Async Server Component */}
+                        <AuthStatus />
+                    </div>
+                    {/* @ts-expect-error Server Component */}
                     <SignOut />
                 </Suspense>
                 <main className="bg-black">{children}</main>

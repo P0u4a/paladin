@@ -1,10 +1,13 @@
 'use client';
 
-import { signOut } from 'next-auth/react';
+import { getSession, signOut, useSession } from 'next-auth/react';
 import { Button } from './ui/button';
+import Link from 'next/link';
 
-export default function SignOut() {
-    return (
+export default async function SignOut() {
+    const session = await getSession();
+
+    return session ? (
         <Button
             variant="outline"
             className="float-right transition-all"
@@ -12,5 +15,7 @@ export default function SignOut() {
         >
             Sign out
         </Button>
+    ) : (
+        <Link href="/login">Sign in</Link>
     );
 }
