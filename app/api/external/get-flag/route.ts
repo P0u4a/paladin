@@ -1,7 +1,13 @@
 import prisma from '@/lib/prisma';
+import { headers } from 'next/headers';
 
 export async function POST(req: Request) {
-    const { apiKey, projectName, flagName } = await req.json();
+    const headerList = headers();
+    const apiKey = headerList.get('authorization');
+
+    if (!apiKey) return new Response('Unauthorised', { status: 401 });
+
+    const { projectName, flagName } = await req.json();
 
     const key = await prisma.apiKey.findUnique({
         where: {
@@ -33,5 +39,8 @@ export async function POST(req: Request) {
 
     if (!flag) return new Response('Flag not found', { status: 404 });
 
-    return Response.json({ flag }, { status: 200 });
+    return Response.json(
+        { flag },
+        { status: 200, headers: { 'Access-Control-Allow-Origin': '*' } }
+    );
 }
