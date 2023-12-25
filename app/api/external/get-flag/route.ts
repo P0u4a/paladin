@@ -1,5 +1,4 @@
 import prisma from '@/lib/prisma';
-import { headers } from 'next/headers';
 import { NextResponse, NextRequest } from 'next/server';
 
 export const corsHeaders = {
@@ -13,8 +12,7 @@ export async function OPTIONS(req: NextRequest) {
 }
 
 export async function POST(req: NextRequest) {
-    const headerList = headers();
-    const apiKey = headerList.get('Authorization');
+    const apiKey = req.headers.get('Authorization');
 
     if (!apiKey) return new Response('Unauthorised', { status: 401 });
 
