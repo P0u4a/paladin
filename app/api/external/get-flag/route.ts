@@ -4,7 +4,7 @@ import { NextResponse, NextRequest } from 'next/server';
 
 export const corsHeaders = {
     'Access-Control-Allow-Origin': '*',
-    'Access-Control-Allow-Methods': 'POST, OPTIONS',
+    'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
     'Access-Control-Allow-Headers': 'Content-Type, Authorization',
 };
 
@@ -12,7 +12,7 @@ export async function OPTIONS(req: NextRequest) {
     return NextResponse.json({}, { headers: corsHeaders });
 }
 
-export async function POST(req: Request) {
+export async function POST(req: NextRequest) {
     const headerList = headers();
     const apiKey = headerList.get('Authorization');
 
@@ -50,5 +50,5 @@ export async function POST(req: Request) {
 
     if (!flag) return new Response('Flag not found', { status: 404 });
 
-    return Response.json({ flag }, { status: 200, headers: corsHeaders });
+    return NextResponse.json({ flag }, { status: 200, headers: corsHeaders });
 }
