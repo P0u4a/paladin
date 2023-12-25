@@ -1,6 +1,5 @@
 import prisma from '@/lib/prisma';
 import { NextResponse, NextRequest } from 'next/server';
-import cors from '@/lib/cors';
 
 export const corsHeaders = {
     'Access-Control-Allow-Origin': '*',
@@ -9,12 +8,7 @@ export const corsHeaders = {
 };
 
 export async function OPTIONS(req: NextRequest) {
-    return cors(
-        req,
-        new Response(null, {
-            status: 204,
-        })
-    );
+    return NextResponse.json({}, { headers: corsHeaders });
 }
 
 export async function POST(req: NextRequest) {
@@ -53,11 +47,6 @@ export async function POST(req: NextRequest) {
     });
 
     if (!flag) return new Response('Flag not found', { status: 404 });
-    return cors(
-        req,
-        new Response(JSON.stringify(flag), {
-            status: 200,
-            headers: { 'Content-Type': 'application/json' },
-        })
-    );
+
+    return NextResponse.json({ flag }, { status: 200, headers: corsHeaders });
 }
