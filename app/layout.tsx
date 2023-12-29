@@ -4,9 +4,11 @@ import { Inter } from 'next/font/google';
 import { Toaster } from 'react-hot-toast';
 import AuthStatus from '@/components/auth-status';
 import { Suspense } from 'react';
-import SignOut from '@/components/sign-out';
+import Login from '@/components/login';
+import ClientProvider from '@/components/context/client-provider';
+import { getServerSession } from 'next-auth';
 import Link from 'next/link';
-import { SessionProvider } from 'next-auth/react';
+import Image from 'next/image';
 
 const inter = Inter({
     variable: '--font-inter',
@@ -29,21 +31,30 @@ export default async function RootLayout({
 }: {
     children: React.ReactNode;
 }) {
+    const session = getServerSession();
     return (
         <html lang="en">
-            <body className={inter.variable}>
-                <Toaster />
-                <Suspense fallback="Loading...">
-                    <div className="flex flex-row gap-4 items-center bg-black absolute">
-                        <Link href="/">Home</Link>
-                        {/* @ts-expect-error Async Server Component */}
-                        <AuthStatus />
-                    </div>
-                    {/* @ts-expect-error Server Component */}
-                    <SignOut />
-                </Suspense>
-                <main className="bg-black">{children}</main>
-            </body>
+            <ClientProvider session={session}>
+                <body className={`${inter.variable} bg-black`}>
+                    <Toaster />
+                    <Suspense fallback="Loading...">
+                        <div className="flex items-center bg-black pt-5">
+                            <Link href={'/'} className="float-left pl-20">
+                                <Image
+                                    src={'/logo.png'}
+                                    alt="Home screen logo"
+                                    width={52}
+                                    height={52}
+                                />
+                            </Link>
+                            <Login className="float-right w-screen pr-20" />
+                            {/* @ts-expect-error Async Server Component */}
+                            <AuthStatus />
+                        </div>
+                    </Suspense>
+                    <main className="bg-black">{children}</main>
+                </body>
+            </ClientProvider>
         </html>
     );
 }

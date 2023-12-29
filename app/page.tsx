@@ -3,17 +3,10 @@ import Link from 'next/link';
 
 export default function Home() {
     return (
-        <div className="flex h-screen">
-            <div className="w-screen h-screen flex flex-col justify-center items-center">
-                <Image
-                    width={512}
-                    height={512}
-                    src="/logo.png"
-                    alt="Platforms on Vercel"
-                    className="w-48 h-48"
-                />
-                <div className="text-center max-w-screen-sm mb-10">
-                    <h1 className="text-stone-200 font-bold text-2xl">
+        <div className="flex">
+            <div className="flex h-screen w-screen flex-col justify-center items-center">
+                <div className="text-center mb-10">
+                    <h1 className="text-stone-200 font-bold text-6xl">
                         Paladin
                     </h1>
                     <p className="text-stone-400 mt-5">
