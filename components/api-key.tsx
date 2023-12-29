@@ -17,16 +17,14 @@ export default function ApiKey({ name, value }: ApiKeyProps) {
     const [hide, setHide] = useState(true);
 
     return (
-        <div className="flex flex-row gap-2">
-            <div className="flex flex-col gap-1">
-                <label className="font-bold">{name}</label>
-                <Input
-                    className="pointer-events-none max-w-xs"
-                    readOnly
-                    type={`${hide ? 'password' : 'text'}`}
-                    value={value}
-                />
-            </div>
+        <div className="flex flex-row gap-2 items-center">
+            <label>{name}</label>
+            <Input
+                className="pointer-events-none max-w-xs"
+                readOnly
+                type={`${hide ? 'password' : 'text'}`}
+                value={value}
+            />
 
             <Toggle
                 onPressedChange={(e) => setHide(!e)}

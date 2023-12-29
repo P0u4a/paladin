@@ -12,9 +12,9 @@ export default async function Projects() {
 
     return (
         <>
-            <section className="flex flex-col justify-center items-center gap-5 h-screen">
+            <section className="flex flex-col justify-center items-center gap-5 pt-10">
                 <NewProjectForm />
-                <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
+                <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 pt-20">
                     {projects.map(({ id, name }) => (
                         <ProjectCard key={id} name={name} id={id} />
                     ))}

@@ -16,11 +16,13 @@ export default async function ApiKeys() {
     });
 
     return (
-        <section className="flex flex-col gap-4 h-screen pt-20">
+        <section className="flex flex-col gap-4 pt-20">
             <GenerateKey userEmail={userEmail} />
-            {apiKeys.map(({ key }) => (
-                <ApiKey key={key} value={key} />
-            ))}
+            <div className="flex justify-center items-center pt-10">
+                {apiKeys.map(({ key, name }) => (
+                    <ApiKey key={key} value={key} name={name} />
+                ))}
+            </div>
         </section>
     );
 }

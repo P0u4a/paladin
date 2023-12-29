@@ -32,7 +32,7 @@ export default function GenerateKey({ userEmail }: GenerateKeyProps) {
     };
     return (
         <form
-            className="flex flex-col gap-4"
+            className="flex flex-col gap-4 justify-center items-center"
             onSubmit={(e) => {
                 e.preventDefault();
                 generate();
