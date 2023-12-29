@@ -2,7 +2,6 @@ import '@/styles/globals.css';
 import { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import { Toaster } from 'react-hot-toast';
-import AuthStatus from '@/components/auth-status';
 import { Suspense } from 'react';
 import Login from '@/components/login';
 import ClientProvider from '@/components/context/client-provider';
@@ -48,8 +47,6 @@ export default async function RootLayout({
                                 />
                             </Link>
                             <Login className="float-right w-screen pr-20" />
-                            {/* @ts-expect-error Async Server Component */}
-                            <AuthStatus />
                         </div>
                     </Suspense>
                     <main className="bg-black">{children}</main>
