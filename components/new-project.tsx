@@ -32,7 +32,7 @@ export default function NewProjectForm() {
     return (
         <form
             className="flex flex-col gap-3"
-            onSubmit={(e) => {
+            onSubmit={async (e) => {
                 e.preventDefault();
                 if (!validateInput(ref.current?.value)) {
                     toast.error('Project name cannot have spaces');
@@ -40,7 +40,9 @@ export default function NewProjectForm() {
                 }
                 setLoading(true);
                 if (ref.current == null) return;
-                newProject(ref.current?.value).then(() => setLoading(false));
+                await newProject(ref.current?.value).then(() =>
+                    setLoading(false)
+                );
                 ref.current.value = '';
             }}
         >

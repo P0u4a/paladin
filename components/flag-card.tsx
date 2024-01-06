@@ -61,7 +61,7 @@ export default function FlagCard({ id, name, description, active }: CardProps) {
                     Edit
                 </Link>
                 <Button
-                    onClick={() => deleteFlag()}
+                    onClick={async () => await deleteFlag()}
                     className="text-red-500 border-red-500 hover:bg-red-500 hover:text-black"
                     variant="outline"
                 >

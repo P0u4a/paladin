@@ -11,7 +11,7 @@ An excercise to see how a barebones version of something like LaunchDarkly could
 ## Usage
 
 **Server**
-`https://p0u4a-paladin.vercel.app/api
+`https://p0u4a-paladin.vercel.app/api`
 
 **Endpoint**
 `POST /external/get-flag?pname={projectName}&fname={flagName}`
