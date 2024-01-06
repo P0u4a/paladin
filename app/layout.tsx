@@ -8,6 +8,7 @@ import ClientProvider from '@/components/context/client-provider';
 import { getServerSession } from 'next-auth';
 import Link from 'next/link';
 import Image from 'next/image';
+import { getSession } from 'next-auth/react';
 
 const inter = Inter({
     variable: '--font-inter',
@@ -25,12 +26,12 @@ export const metadata: Metadata = {
     themeColor: '#FFF',
 };
 
-export default function RootLayout({
+export default async function RootLayout({
     children,
 }: {
     children: React.ReactNode;
 }) {
-    const session = getServerSession();
+    const session = await getServerSession();
     return (
         <html lang="en">
             <ClientProvider session={session}>
