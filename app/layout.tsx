@@ -25,7 +25,7 @@ export const metadata: Metadata = {
     themeColor: '#FFF',
 };
 
-export default async function RootLayout({
+export default function RootLayout({
     children,
 }: {
     children: React.ReactNode;
