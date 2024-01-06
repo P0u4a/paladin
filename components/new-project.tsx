@@ -4,7 +4,7 @@ import toast from 'react-hot-toast';
 import { Button } from './ui/button';
 import { Input } from './ui/input';
 import { useRef, useState } from 'react';
-import LoadingDots from './loading-dots';
+import LoadingDots from './loading-dots/loading-dots';
 import { validateInput } from '@/lib/validate-input';
 
 export default function NewProjectForm() {

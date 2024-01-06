@@ -18,14 +18,16 @@ export default function Login({ className }: LoginProps) {
                 <Button
                     variant="outline"
                     className="float-right transition-all"
-                    onClick={() => signOut()}
+                    onClick={() => signOut({ redirect: false })}
                 >
                     Sign out
                 </Button>
             ) : (
                 <Link
                     href="/login"
-                    className={cn(buttonVariants({ variant: 'default' }))}
+                    className={`float-right ${cn(
+                        buttonVariants({ variant: 'default' })
+                    )}`}
                 >
                     Sign in
                 </Link>

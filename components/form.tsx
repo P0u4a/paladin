@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import { signIn } from 'next-auth/react';
-import LoadingDots from '@/components/loading-dots';
+import LoadingDots from '@/components/loading-dots/loading-dots';
 import toast from 'react-hot-toast';
 import Link from 'next/link';
 import { Input } from './ui/input';
@@ -69,7 +69,7 @@ export default function Form({ type }: { type: 'login' | 'register' }) {
                     id="email"
                     name="email"
                     type="email"
-                    placeholder="panic@thedis.co"
+                    placeholder="a@b.com"
                     autoComplete="email"
                     required
                     className="mt-1 block w-full appearance-none rounded-md border px-3 py-2 shadow-sm focus:outline-none sm:text-sm"

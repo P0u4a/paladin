@@ -1,7 +1,7 @@
 'use client';
 
 import toast from 'react-hot-toast';
-import LoadingDots from './loading-dots';
+import LoadingDots from './loading-dots/loading-dots';
 import { Button } from './ui/button';
 import { Input } from './ui/input';
 import { useRef, useState } from 'react';

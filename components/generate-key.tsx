@@ -2,7 +2,7 @@
 
 import toast from 'react-hot-toast';
 import { Button } from './ui/button';
-import LoadingDots from './loading-dots';
+import LoadingDots from './loading-dots/loading-dots';
 import { useRef, useState } from 'react';
 import { Input } from './ui/input';
 
