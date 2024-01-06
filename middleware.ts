@@ -1,6 +1,10 @@
 import { withAuth } from 'next-auth/middleware';
 
-export const publicPaths = new Set(['/', '/login', '/register']);
+export const publicPaths = new Set(['/', '/login', '/register', '/logo.png']);
+
+export const config = {
+    matcher: ['/((?!_next/static|_next/image|favicon.ico).*)'],
+};
 
 export default withAuth(function middleware(req) {}, {
     callbacks: {
