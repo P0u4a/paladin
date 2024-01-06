@@ -8,11 +8,13 @@ import { useRef, useState } from 'react';
 import { useParams } from 'next/navigation';
 import { validateInput } from '@/lib/validate-input';
 import { Textarea } from './ui/textarea';
+import { useRouter } from 'next/navigation';
 
 export default function NewFlagForm() {
     const [loading, setLoading] = useState(false);
     const nameRef = useRef<HTMLInputElement>(null);
     const descRef = useRef<HTMLTextAreaElement>(null);
+    const router = useRouter();
     const params = useParams();
     const projectId = parseInt(params.id);
     const newFlag = async (name: string, description?: string) => {
@@ -26,7 +28,10 @@ export default function NewFlagForm() {
 
         if (res.status != 200)
             toast.error('Something went wrong. Please try again.');
-        else toast.success('Flag created successfully!');
+        else {
+            toast.success('Flag created successfully!');
+            router.refresh();
+        }
     };
     return (
         <form

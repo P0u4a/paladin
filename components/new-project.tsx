@@ -6,10 +6,13 @@ import { Input } from './ui/input';
 import { useRef, useState } from 'react';
 import LoadingDots from './loading-dots/loading-dots';
 import { validateInput } from '@/lib/validate-input';
+import { useRouter } from 'next/navigation';
 
 export default function NewProjectForm() {
     const [loading, setLoading] = useState(false);
     const ref = useRef<HTMLInputElement>(null);
+    const router = useRouter();
+
     const newProject = async (name: string) => {
         const res = await fetch('/api/new-project', {
             method: 'POST',
@@ -21,7 +24,10 @@ export default function NewProjectForm() {
 
         if (res.status != 200)
             toast.error('Something went wrong. Please try again.');
-        else toast.success('Project created successfully!');
+        else {
+            toast.success('Project created successfully!');
+            router.refresh();
+        }
     };
     return (
         <form

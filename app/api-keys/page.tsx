@@ -13,14 +13,17 @@ export default async function ApiKeys() {
         where: {
             userEmail,
         },
+        select: {
+            name: true,
+        },
     });
 
     return (
         <section className="flex flex-col gap-4 pt-20">
             <GenerateKey userEmail={userEmail} />
-            <div className="flex justify-center items-center pt-10">
-                {apiKeys.map(({ key, name }) => (
-                    <ApiKey key={key} value={key} name={name} />
+            <div className="flex flex-col gap-3 justify-center items-center pt-10">
+                {apiKeys.map(({ name }) => (
+                    <ApiKey key={name} name={name} />
                 ))}
             </div>
         </section>

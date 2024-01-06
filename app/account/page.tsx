@@ -23,7 +23,6 @@ export default function Account() {
         });
 
         if (res.status !== 200) {
-            console.log(res.status);
             toast.error('Something went wrong. Please try again.');
         } else {
             toast.success('Account deleted');

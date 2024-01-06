@@ -32,7 +32,6 @@ export async function POST(req: Request) {
 
         return new Response('Account deleted', { status: 200 });
     } catch (err) {
-        console.log(err);
         return new Response('account deletion failed', { status: 500 });
     }
 }

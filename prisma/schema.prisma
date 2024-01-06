@@ -23,7 +23,7 @@ model User {
 
 model ApiKey {
   key      String    @id
-  name     String
+  name     String    @unique
   userEmail   String       // Foreign key reference to User
   user     User      @relation(fields: [userEmail], references: [email])
 }

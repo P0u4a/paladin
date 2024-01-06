@@ -1,45 +1,54 @@
 'use client';
 
 import { Input } from './ui/input';
-import { Toggle } from './ui/toggle';
-import { Button } from './ui/button';
+import { Button, buttonVariants } from './ui/button';
 import { useState } from 'react';
-import { Copy } from 'lucide-react';
-import { Eye } from 'lucide-react';
+import LoadingDots from './loading-dots/loading-dots';
 import toast from 'react-hot-toast';
+import { useRouter } from 'next/navigation';
+import { cn } from '@/lib/utils';
 
 type ApiKeyProps = {
     name: string;
-    value: string;
 };
 
-export default function ApiKey({ name, value }: ApiKeyProps) {
-    const [hide, setHide] = useState(true);
+export default function ApiKey({ name }: ApiKeyProps) {
+    const router = useRouter();
+    const [loading, setLoading] = useState(false);
+    const revokeApiKey = async (name: string) => {
+        setLoading(true);
+        const res = await fetch('/api/revoke-key', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ name }),
+        });
 
+        if (res.status !== 200) {
+            toast.error('Something went wrong. Please try again.');
+        } else {
+            toast.success('Account deleted');
+            router.refresh();
+        }
+
+        setLoading(false);
+    };
     return (
         <div className="flex flex-row gap-2 items-center">
-            <label>{name}</label>
+            <label className="max-w-[10rem]">{name}</label>
             <Input
                 className="pointer-events-none max-w-xs"
                 readOnly
-                type={`${hide ? 'password' : 'text'}`}
-                value={value}
+                type="password"
+                value={'................'}
             />
 
-            <Toggle
-                onPressedChange={(e) => setHide(!e)}
-                aria-label="Toggle visibility"
-            >
-                <Eye className="h-4 w-4" />
-            </Toggle>
             <Button
-                variant="ghost"
-                onClick={() => {
-                    navigator.clipboard.writeText(value);
-                    toast.success('Copied to clipboard');
-                }}
+                className={cn(buttonVariants({ variant: 'destructive' }))}
+                onClick={() => revokeApiKey(name)}
             >
-                <Copy className="h-4 w-4" />
+                {loading ? <LoadingDots color="#808080" /> : <p>Revoke</p>}
             </Button>
         </div>
     );

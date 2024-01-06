@@ -12,7 +12,7 @@ export async function POST(req: Request) {
                 userEmail,
             },
         });
-        return new NextResponse('Success', { status: 200 });
+        return NextResponse.json({ key }, { status: 200 });
     } catch (err) {
         return new NextResponse('Internal Error', { status: 500 });
     }
