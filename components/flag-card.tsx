@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import { Button } from './ui/button';
 import { buttonVariants } from './ui/button';
 import {
@@ -21,6 +22,8 @@ type CardProps = {
 };
 
 export default function FlagCard({ id, name, description, active }: CardProps) {
+    const router = useRouter();
+
     const deleteFlag = async () => {
         const res = await fetch('/api/delete-flag', {
             method: 'POST',
@@ -32,7 +35,10 @@ export default function FlagCard({ id, name, description, active }: CardProps) {
 
         if (res.status !== 200)
             toast.error('Something went wrong. Please try again.');
-        else toast.success('Flag deleted successfully.');
+        else {
+            toast.success('Flag deleted successfully.');
+            router.refresh();
+        }
     };
     return (
         <Card className="max-w-xs">
