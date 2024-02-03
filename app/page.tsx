@@ -1,4 +1,3 @@
-import Image from 'next/image';
 import Link from 'next/link';
 
 export default function Home() {
@@ -6,7 +5,7 @@ export default function Home() {
         <div className="flex">
             <div className="flex w-screen flex-col justify-center items-center pt-20">
                 <div className="text-center mb-10">
-                    <h1 className="text-stone-200 font-bold text-6xl">
+                    <h1 className="bg-gradient-to-r from-stone-200 to-stone-400 bg-clip-text text-transparent font-bold text-6xl">
                         Paladin
                     </h1>
                     <p className="text-stone-400 mt-5">
