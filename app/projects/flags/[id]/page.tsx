@@ -14,7 +14,12 @@ export default async function Flag({ params }: { params: { id: string } }) {
         },
     });
 
-    if (!res) return <p>Failed to load flag.</p>;
+    if (!res)
+        return (
+            <p className="flex justify-center items-center font-semibold">
+                Failed to load flag.
+            </p>
+        );
 
     return (
         <section className="w-screen flex flex-col gap-4 pt-20 items-center justify-center">

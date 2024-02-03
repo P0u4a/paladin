@@ -1,6 +1,6 @@
 import styles from './loading-dots.module.css';
 
-const LoadingDots = ({ color = '#000' }: { color?: string }) => {
+export default function LoadingDots({ color = '#000' }: { color?: string }) {
     return (
         <span className={styles.loading}>
             <span style={{ backgroundColor: color }} />
@@ -8,6 +8,4 @@ const LoadingDots = ({ color = '#000' }: { color?: string }) => {
             <span style={{ backgroundColor: color }} />
         </span>
     );
-};
-
-export default LoadingDots;
+}

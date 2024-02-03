@@ -14,6 +14,9 @@ import {
 import { Badge } from './ui/badge';
 import { cn } from '@/lib/utils';
 import toast from 'react-hot-toast';
+import LoadingDots from './loading-dots/loading-dots';
+import { useState } from 'react';
+
 type CardProps = {
     id: number;
     name: string;
@@ -23,8 +26,10 @@ type CardProps = {
 
 export default function FlagCard({ id, name, description, active }: CardProps) {
     const router = useRouter();
+    const [loading, setLoading] = useState(false);
 
     const deleteFlag = async () => {
+        setLoading(true);
         const res = await fetch('/api/delete-flag', {
             method: 'POST',
             headers: {
@@ -33,6 +38,7 @@ export default function FlagCard({ id, name, description, active }: CardProps) {
             body: JSON.stringify({ id }),
         });
 
+        setLoading(false);
         if (res.status !== 200)
             toast.error('Something went wrong. Please try again.');
         else {
@@ -61,11 +67,11 @@ export default function FlagCard({ id, name, description, active }: CardProps) {
                     Edit
                 </Link>
                 <Button
+                    disabled={loading}
                     onClick={deleteFlag}
-                    className="text-red-500 border-red-500 hover:bg-red-500 hover:text-black"
-                    variant="outline"
+                    variant="destructive"
                 >
-                    Delete
+                    {loading ? <LoadingDots /> : <p>Delete</p>}
                 </Button>
             </CardContent>
         </Card>
