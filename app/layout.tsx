@@ -1,14 +1,13 @@
 import '@/styles/globals.css';
 import { Metadata } from 'next';
 import { Inter } from 'next/font/google';
-import { Toaster } from 'react-hot-toast';
 import { Suspense } from 'react';
 import Login from '@/components/login';
 import ClientProvider from '@/components/context/client-provider';
 import { getServerSession } from 'next-auth';
 import Link from 'next/link';
 import Image from 'next/image';
-import { getSession } from 'next-auth/react';
+import Toast from '@/components/ui/toast';
 
 const inter = Inter({
     variable: '--font-inter',
@@ -36,7 +35,7 @@ export default async function RootLayout({
         <html lang="en">
             <ClientProvider session={session}>
                 <body className={`${inter.variable} bg-black`}>
-                    <Toaster />
+                    <Toast />
                     <Suspense fallback="Loading...">
                         <div className="flex items-center bg-black pt-5">
                             <Link href={'/'} className="float-left pl-20">
