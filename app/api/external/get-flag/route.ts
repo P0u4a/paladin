@@ -1,5 +1,6 @@
 import prisma from '@/lib/prisma';
 import { compare } from 'bcrypt';
+import { NextResponse } from 'next/server';
 
 export async function GET(req: Request) {
     const { searchParams } = new URL(req.url);
@@ -7,11 +8,11 @@ export async function GET(req: Request) {
     const flagName = searchParams.get('fname');
 
     if (!projectName || !flagName)
-        return new Response('Undefined params', { status: 400 });
+        return new NextResponse('Undefined params', { status: 400 });
 
     const apiKey = req.headers.get('X-Paladin-Key');
 
-    if (!apiKey) return new Response('Unauthorized', { status: 401 });
+    if (!apiKey) return new NextResponse('Unauthorized', { status: 401 });
 
     const key = await prisma.apiKey.findUnique({
         where: {
@@ -19,10 +20,7 @@ export async function GET(req: Request) {
         },
     });
 
-    if (!key) return new Response('Key not found', { status: 401 });
-
-    if (!(await compare(apiKey, key.key)))
-        return new Response('Unauthorized', { status: 401 });
+    if (!key) return new NextResponse('Key not found', { status: 401 });
 
     const flag = await prisma.flag.findFirst({
         where: {
@@ -40,9 +38,9 @@ export async function GET(req: Request) {
         },
     });
 
-    if (!flag) return new Response('Flag not found', { status: 404 });
+    if (!flag) return new NextResponse('Flag not found', { status: 404 });
 
     const { name, description, active } = flag;
 
-    return Response.json({ name, description, active }, { status: 200 });
+    return NextResponse.json({ name, description, active }, { status: 200 });
 }
