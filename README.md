@@ -4,9 +4,7 @@ Simple feature flag manager
 
 ## Motivation
 
-An excercise to see how a minimally viable version of something like [LaunchDarkly](https://launchdarkly.com/) could be replicated. It all started when a friend told me
-
-> _LaunchDarkly is literally just a concurrent hashmap to turn a boolean on and off bro._
+An excercise to see how a minimally viable version of something like [LaunchDarkly](https://launchdarkly.com/) could be replicated.
 
 ## Usage
 
