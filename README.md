@@ -2,11 +2,14 @@
 
 Simple feature flag manager
 
+# Preview
+![flags](https://github.com/P0u4a/paladin/assets/66873325/e54b778d-ca4a-4e11-80fe-85f2410bb129)
+![projects](https://github.com/P0u4a/paladin/assets/66873325/b21cedde-b8b2-4f98-b33f-2452ba397f88)
+![signup](https://github.com/P0u4a/paladin/assets/66873325/72c36049-0eec-40c7-9c6e-051a586790b9)
+
 ## Motivation
 
-An excercise to see how a minimally viable version of something like [LaunchDarkly](https://launchdarkly.com/) could be replicated. It all started when a friend told me
-
-> _LaunchDarkly is literally just a concurrent hashmap to turn a boolean on and off bro._
+An excercise to see how a minimally viable version of something like [LaunchDarkly](https://launchdarkly.com/) could be replicated.
 
 ## Usage
 
