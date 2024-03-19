@@ -28,7 +28,7 @@ export default function ApiKey({ name }: ApiKeyProps) {
         if (res.status !== 200) {
             toast.error('Something went wrong. Please try again.');
         } else {
-            toast.success('Account deleted');
+            toast.success('Key revoked.');
             router.refresh();
         }
 
